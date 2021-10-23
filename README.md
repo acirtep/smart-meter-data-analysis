@@ -2,6 +2,8 @@
 Data versioning with postgres and python
 
 This repo is used to detail what data versioning is.
+Never provide connection details in a git repo. 
+The ones provided here are to be used only while playing on your local system.
 
 1. Run `docker-compose up --build`
 2. Run demo.py inside the python app container:
