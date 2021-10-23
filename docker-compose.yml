@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  
+  postgres_db:
+    image: postgres:14.0
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ecommerce
+      POSTGRES_USER: ecommerce_user
+    privileged: true
+    ports:
+      - 5433:5432
+    networks:
+      - app-tier
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+
+  python_app:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres_db
+    links:
+      - postgres_db:postgres_db
+    networks:
+      - app-tier
+    command:
+      tail -f /dev/null
+
+networks:
+  app-tier:
+    driver: bridge
