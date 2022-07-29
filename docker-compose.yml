@@ -6,8 +6,8 @@ services:
     image: postgres:14.0
     environment:
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: ecommerce
-      POSTGRES_USER: ecommerce_user
+      POSTGRES_DB: smartmeter_db
+      POSTGRES_USER: da_user
     privileged: true
     ports:
       - 5433:5432
@@ -17,16 +17,22 @@ services:
       - ./postgres:/docker-entrypoint-initdb.d
 
   python_app:
-    restart: always
+    container_name: smart_meter_DA_container
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH:/app/src
     depends_on:
       - postgres_db
     links:
       - postgres_db:postgres_db
     networks:
       - app-tier
+    volumes:
+      - ./input_data:/app/input_data
+      - ./src:/app/src
+      - ./visuals:/app/visuals
     command:
       tail -f /dev/null
 

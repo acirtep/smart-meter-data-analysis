@@ -1,17 +1,11 @@
-# demo-postgres-python
-Data versioning with postgres and python
-
-This repo is used to detail what data versioning is.
-Never provide connection details in a git repo. 
-The ones provided here are to be used only while playing on your local system.
+# smart-meter-data-analysis
+This repository contains data analysis tips on smart meter historical data.
+It expects to have in the input_data folder a file called historical_electricity.xlsx,
+which has the following header:
+Datum	Levering normaal	Levering dal	Teruglevering normaal	Teruglevering dal	Meternummer	EAN	Product
+If you have a different header feel free to change the method get_raw_data from data_analysis.py.
 
 1. Run `docker-compose up --build`
-2. Run demo.py inside the python app container:
-```
-petra1$ docker ps
-CONTAINER ID        IMAGE                             COMMAND  ....                
-c9a8036c5e80        demo-postgres-python_python_app   "tail -f /dev/null" 
-```
-- `docker exec -it c9a8036c5e80 /bin/bash`
-- `root@c9a8036c5e80:/usr/src/app# python src/demo.py`
-3. Or simply use `ipython` for interactive Python
+2. Run `docker exec -it smart_meter_DA_container python /app/src/data_analysis.py`
+to generate visuals for your own data
+3. ipython is also available with `docker exec -it smart_meter_DA_container ipython`
