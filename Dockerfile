@@ -4,7 +4,9 @@ RUN apt-get update && apt-get install -y \
     vim \
  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src/app
-COPY . .
+WORKDIR /app
+COPY /src ./src
+COPY requirements.txt .
+RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN export PYTHONPATH=$PYTHONPATH:/usr/src/app/scripts
+RUN export PYTHONPATH=$PYTHONPATH:/app/src
