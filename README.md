@@ -8,5 +8,8 @@ If you have a different header feel free to change the method get_raw_data from 
 1. Run `docker-compose up --build`
 2. Run `docker exec -it smart_meter_DA_container python /app/src/data_analysis.py`
 to generate visuals for your own data
+
 ![Example](https://github.com/acirtep/smart-meter-data-analysis/blob/main/visuals/frequency_avg.jpg)
+
+
 3. ipython is also available with `docker exec -it smart_meter_DA_container ipython`
