@@ -1,7 +1,7 @@
 FROM python:3.10-slim-bullseye
 
 RUN apt-get update && apt-get install -y \
-    vim \
+    vim libpq-dev python3-dev gcc curl sudo \
  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
